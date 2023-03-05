@@ -15,9 +15,11 @@ export class Song {
 export class SetList {
     songs: Song[];
     name: string;
+    spotifyPlaylistId: string;
 
-    constructor(name: string, songs: Song[]) {
+    constructor(name: string, songs: Song[], spotifyPlaylistId: string = '') {
         this.name = name;
         this.songs = songs;
+        this.spotifyPlaylistId = spotifyPlaylistId;
     }
 }
