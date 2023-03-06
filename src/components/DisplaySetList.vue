@@ -1,13 +1,13 @@
 <template>
     <div id="display">
         <header>{{ setList.name }}</header>
-        <main>
+        <main @click="toggleMetronome">
             <span id="artist">{{ currentSong?.artist }}</span>
             <span id="song-title">{{ currentSong?.title }}</span>
         </main>
         <footer>
             <button id="prev" @click="prevSong">Prev</button>
-            <button id="metronome" @click="toggleMetronome">Metronome</button>
+            <button id="edit" @click="gotoEdit">Metronome</button>
             <button id="next" @click="nextSong">Next</button>
         </footer>
     </div>
@@ -16,6 +16,7 @@
 <script setup lang="ts">
 import { useSetListStore } from '@/stores/setlist';
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router';
 
 const setListStore = useSetListStore();
 const setList = ref(setListStore.setList);
@@ -23,6 +24,8 @@ const setList = ref(setListStore.setList);
 const currentSong = computed(() => setList.value.songs[currentSongIndex.value]);
 const currentSongIndex = ref(0);
 const metronomeStatus = ref(false);
+
+const router = useRouter();
 
 let metronomeInterval: number | null = null
 let metronomeFrequency = computed(() => {
@@ -76,6 +79,11 @@ function blinkScreen() {
         if (!display) return;
         display.style.backgroundColor = 'transparent';
     }, 100);
+}
+
+function gotoEdit() {
+    const listId = setList.value.id;
+    router.push(`${listId}/settings`);
 }
 </script>
 
