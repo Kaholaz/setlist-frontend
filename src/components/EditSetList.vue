@@ -18,7 +18,10 @@
                 </tr>
                 <SongRow v-for="(song, index) in setList.songs" :key="song.title" :song="song" :index="index" @delete="removeSong" />
             </table>
-            <span id="add-song-row"><button @click="addSong">Add Song</button></span>
+            <span id="add-song-row">
+                <button @click="addSong">Add Song</button>
+                <button @click="saveSetList">Save</button>
+            </span>
         </main>
         <footer></footer>
     </div>
