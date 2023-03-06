@@ -124,21 +124,7 @@ function blinkScreen() {
     font-size: 2rem;
 }
 
-#display > footer > button {
-    height: 100%;
-    width: fit-content;
-
-    border: solid 0.1rem #2c3e50;
-    border-radius: 0.2rem;
-    background-color: transparent;
-    color: #2c3e50;
+button {
     font-size: 2rem;
 }
-
-#display > footer > button:hover {
-    background-color: #2c3e50;
-    color: white;
-    cursor: pointer;
-}
-
 </style>

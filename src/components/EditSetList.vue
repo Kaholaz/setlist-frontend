@@ -3,7 +3,8 @@
         <header>
             <h1>{{ setList.name }}</h1>
             <span id="spotify-link">
-                <input type="text" v-model="setList.spotifyPlaylist" /><button @click="synchronizeSpotify">Synchronize</button>
+                <button @click="synchronizeSpotify">Synchronize</button>
+                <input type="text" v-model="setList.spotifyPlaylist" />
             </span>
         </header>
         <main>
@@ -69,7 +70,8 @@ main {
     align-items: left;
     justify-content: center;
     height: 100%;
-    width: 100%;
+    width: 80%;
+    margin: auto;
 }
 
 button {
@@ -78,6 +80,8 @@ button {
 
 table {
     width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 table > tr {
@@ -91,6 +95,10 @@ table > tr > th, table > tr > td {
     margin: 0;
 }
 
+#settings * {
+    font-size: 1.2rem;
+}
+
 #add-song-row {
     margin: 0;
     display: flex;
@@ -99,5 +107,11 @@ table > tr > th, table > tr > td {
     justify-content: center;
     height: 100%;
     width: 100%;
+}
+
+input, button { 
+    margin: 0.2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 </style>
