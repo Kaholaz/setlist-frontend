@@ -15,6 +15,12 @@ html {
   font-size: 24px;
 }
 
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 html, body, #app {
   height: 100%;
   width: 100%;
