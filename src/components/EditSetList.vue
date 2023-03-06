@@ -1,5 +1,6 @@
 <template>
-    <div id="settings">
+    <LoadingScreen v-if="loading" />
+    <div v-else id="settings">
         <header>
             <h1>{{ setList.name }}</h1>
             <span id="spotify-link">
@@ -33,6 +34,9 @@ import { useSetListStore } from '@/stores/setlist';
 import SongRow from '@/components/SongRow.vue'
 import SetListApi from '@/api';
 import { ref } from 'vue';
+import LoadingScreen from './LoadingScreen.vue';
+
+const loading = ref(false);
 
 const setListStore = useSetListStore();
 const setList = ref(setListStore.setList);
@@ -50,14 +54,25 @@ function addSong() {
 }
 
 function saveSetList() {
+    loading.value = true;
     SetListApi.updateSetList(setList.value).then(newSetList => {
         setList.value = newSetList;
+    }).catch(err => {
+        console.error(err);
+    }).finally(() => {
+        loading.value = false;
     });
 }
 
 function synchronizeSpotify() {
+    loading.value = true;
     SetListApi.syncSetList(setList.value).then(newSetList => {
         setList.value = newSetList;
+    }).catch(err => {
+        console.error(err);
+        setList.value.spotifyPlaylist = "";
+    }).finally(() => {
+        loading.value = false;
     });
 }
 
