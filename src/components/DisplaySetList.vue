@@ -14,15 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/classes'
 import { useSetListStore } from '@/stores/setlist';
 import { computed, ref } from 'vue'
 
 const setListStore = useSetListStore();
-const setList = setListStore.setList;
-const songs = setList.songs;
+const setList = ref(setListStore.setList);
 
-const currentSong = ref<Song | null>(setList.songs[0]);
+const currentSong = computed(() => setList.value.songs[currentSongIndex.value]);
 const currentSongIndex = ref(0);
 const metronomeStatus = ref(false);
 
@@ -34,9 +32,8 @@ let metronomeFrequency = computed(() => {
 
 function nextSong() {
     stopMetronome();
-    if (currentSongIndex.value < songs.length - 1) {
+    if (currentSongIndex.value < setList.value.songs.length - 1) {
         currentSongIndex.value++;
-        currentSong.value = songs[currentSongIndex.value];
     }
 }
 
@@ -44,7 +41,6 @@ function prevSong() {
     stopMetronome();
     if (currentSongIndex.value > 0) {
         currentSongIndex.value--;
-        currentSong.value = songs[currentSongIndex.value];
     }
 }
 
