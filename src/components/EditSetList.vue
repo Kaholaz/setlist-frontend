@@ -4,8 +4,8 @@
         <header>
             <h1>{{ setList.name }}</h1>
             <span id="spotify-link">
-                <button @click="synchronizeSpotify">Synchronize</button>
-                <input type="text" placeholder="Spotify playlist URL" v-model="setList.spotifyPlaylist" />
+                <button @click="synchronizeSpotify" >Synchronize</button>
+                <input type="text" @keydown.enter="synchronizeSpotify" placeholder="Spotify playlist URL" v-model="setList.spotifyPlaylist" />
             </span>
         </header>
         <main>
