@@ -7,7 +7,7 @@
         </main>
         <footer>
             <button id="prev" @click="prevSong">Prev</button>
-            <button id="edit" @click="gotoEdit">Metronome</button>
+            <button id="edit" @click="gotoEdit">Edit</button>
             <button id="next" @click="nextSong">Next</button>
         </footer>
     </div>
@@ -82,6 +82,7 @@ function blinkScreen() {
 }
 
 function gotoEdit() {
+    stopMetronome();
     const listId = setList.value.id;
     router.push(`${listId}/settings`);
 }
