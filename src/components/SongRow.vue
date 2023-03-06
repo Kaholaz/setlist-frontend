@@ -34,10 +34,7 @@ let props = defineProps<{
     index: number;
 }>()
 
-const emit = defineEmits<{
-    delete: (index: number) => void;
-}>()
-
+const emit = defineEmits(['delete'])
 const edit = ref(false);
 
 function toggleEdit() {
