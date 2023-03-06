@@ -35,6 +35,7 @@ import SongRow from '@/components/SongRow.vue'
 import SetListApi from '@/api';
 import { ref } from 'vue';
 import LoadingScreen from './LoadingScreen.vue';
+import router from '@/router';
 
 const loading = ref(false);
 
@@ -57,6 +58,8 @@ function saveSetList() {
     loading.value = true;
     SetListApi.updateSetList(setList.value).then(newSetList => {
         setList.value = newSetList;
+        const setListId = setList.value.id;
+        router.push(`/${setListId}`);
     }).catch(err => {
         console.error(err);
     }).finally(() => {
