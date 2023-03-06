@@ -18,7 +18,7 @@ export default class SetListApi {
     }
 
     static async updateSetList(setList: SetList) : Promise<SetList> {
-        const response = await api.put(`/setlist/${setList.id}`, setList);
+        const response = await api.post(`/setlist/${setList.id}`, setList);
         return response.data;
     }
 
