@@ -30,27 +30,33 @@
 <script setup lang="ts">
 import { useSetListStore } from '@/stores/setlist';
 import SongRow from '@/components/SongRow.vue'
-import { SetList } from '@/classes';
 import SetListApi from '@/api';
+import { ref } from 'vue';
 
 const setListStore = useSetListStore();
-const setList = setListStore.setList;
+const setList = ref(setListStore.setList);
 
 function removeSong(index: number) {
-    setList.songs.splice(index, 1);
+    setList.value.songs.splice(index, 1);
 }
 
 function addSong() {
-    setList.songs.push({
+    setList.value.songs.push({
         title: "New Song",
         artist: "New Artist",
         tempo: 120,
     });
 }
 
+function saveSetList() {
+    SetListApi.updateSetList(setList.value).then(newSetList => {
+        setList.value = newSetList;
+    });
+}
+
 function synchronizeSpotify() {
-    SetListApi.syncSetList(setList).then(setList => {
-        setListStore.setList = setList;
+    SetListApi.syncSetList(setList.value).then(newSetList => {
+        setList.value = newSetList;
     });
 }
 
