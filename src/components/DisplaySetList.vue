@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import type { Song } from '@/classes'
 import { useSetListStore } from '@/stores/setlist';
-import { computed, defineProps, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const setListStore = useSetListStore();
 const setList = setListStore.setList;

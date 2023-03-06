@@ -4,15 +4,20 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'Set list',
+      path: '/:setList',
+      name: 'displayList',
       component: DisplaySetListView,
     },
     {
-      path: '/settings',
-      name: 'Settings',
+      path: '/:setList/settings',
+      name: 'editList',
       component: () => import('@/views/EditSetListView.vue'),
-    }
+    },
+    {
+      path: '/new',
+      name: 'newList',
+      component: () => import('@/views/NewSetListView.vue'),
+    },
   ]
 })
 

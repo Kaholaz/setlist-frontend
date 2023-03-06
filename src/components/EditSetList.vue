@@ -3,7 +3,7 @@
         <header>
             <h1>{{ setList.name }}</h1>
             <span id="spotify-link">
-                <input type="text" v-model="setList.spotifyPlaylistId" /><button @click="synchronizeSpotify">Synchronize</button>
+                <input type="text" v-model="setList.spotifyPlaylist" /><button @click="synchronizeSpotify">Synchronize</button>
             </span>
         </header>
         <main>
@@ -27,6 +27,8 @@
 <script setup lang="ts">
 import { useSetListStore } from '@/stores/setlist';
 import SongRow from '@/components/SongRow.vue'
+import { SetList } from '@/classes';
+import SetListApi from '@/api';
 
 const setListStore = useSetListStore();
 const setList = setListStore.setList;
@@ -40,12 +42,13 @@ function addSong() {
         title: "New Song",
         artist: "New Artist",
         tempo: 120,
-        timeSignature: 4,
     });
 }
 
 function synchronizeSpotify() {
-    console.log("Synchronizing Spotify");
+    SetListApi.syncSetList(setList).then(setList => {
+        setListStore.setList = setList;
+    });
 }
 
 </script>
